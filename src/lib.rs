@@ -1,10 +1,8 @@
-#[derive(Debug)]
 pub enum TaskStatus {
     TODO,
     DONE,
 }
 
-#[derive(Debug)]
 pub struct Task {
     pub name: String,
     pub status: TaskStatus,
@@ -27,7 +25,6 @@ impl Task {
     }
 }
 
-#[derive(Debug)]
 pub struct TaskList {
     pub name: String,
     pub tasks: Vec<Task>,
