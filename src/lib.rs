@@ -74,3 +74,23 @@ pub extern fn task_list_toggle(list: *mut TaskList, num: uint32_t) {
 
     list.toggle(num);
 }
+
+#[no_mangle]
+pub extern fn task_list_display(list: *const TaskList) {
+    let list = unsafe {
+        assert!(!list.is_null());
+
+        & *list
+    };
+
+    println!("\t{}", list.name);
+
+    for (i, task) in list.tasks.iter().enumerate() {
+        println!("{}\t{}. {}", match task.status {
+            TaskStatus::DONE => "X",
+            TaskStatus::TODO => ""
+        }, i + 1, task.name);
+    }
+
+    println!("\t----------");
+}
