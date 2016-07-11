@@ -42,11 +42,18 @@ impl TaskList {
         self.tasks.push(Task::new(name));
     }
 
-    pub fn remove(&mut self, index: usize) {
+    pub fn remove(&mut self, index: usize) -> Result<(), &'static str> {
+        if index >= self.tasks.len() {
+            return Err("index invalide");
+        }
         self.tasks.remove(index);
+        Ok(())
     }
 
-    pub fn toggle(&mut self, index: usize) {
+    pub fn toggle(&mut self, index: usize) -> Result<(), &'static str> {
+        if index >= self.tasks.len() {
+            return Err("index invalide");
+        }
         let mut task = self.tasks.get_mut(index).unwrap();
         match task.status {
             TaskStatus::TODO => {
@@ -56,5 +63,6 @@ impl TaskList {
                 task.uncheck();
             }
         }
+        Ok(())
     }
 }
